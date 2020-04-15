@@ -1,6 +1,5 @@
-import datetime
+
 import random
-from customer import Customer
 
 
 class Plane:

@@ -22,15 +22,13 @@ def menu():
      - s: choose a seat in the plane (ongoing and return). The system will check whether seats are available.
      '''
 
-
-
     user_input = input("Enter a to add new passenger,\n"
                        "d to delete a passenger,\n"
                        "l to see the list of passenger,\n"
                        "s to see the list of available seats,\n"
                        "save to save\n"
                        "or q to quit.\n")
-    #
+
     while user_input != 'q':
         plane = Plane()
         print(plane)
@@ -40,6 +38,7 @@ def menu():
             customer = Customer(first_name, last_name)
             print(customer)
             dob = customer.get_dob()
+
             # dob = customer.convert_str_date(dob)
             # first_name = plane.get_first_name()
             # last_name = plane.get_last_name()
@@ -50,42 +49,13 @@ def menu():
                 print("Your DOB is wrong!")
                 dob = customer.get_dob()
                 dob = customer.convert_into_date(dob)
+
                 # dob = customer.convert_into_date(dob)
                 # print("Your DOB is wrong!: {}".format(dob))
+
             else:
                 print("DOB: {}".format(dob))
 
-        
-            # while True:
-            #     try:
-            #         dob = customer.convert_str_date(dob)
-            #     except ValueError:
-            #         print("Your DOB is in the wrong format!")
-            #         dob = customer.get_dob()
-            #         continue
-            #     break
-            #
-            # # print(first_name, last_name, dob)
-            #
-            # age = customer.check_dob(dob)
-            # if age < 18:
-            #     print("You are under 18, you cannot fly alone!")
-            # else:
-            #     date_ongoing = customer.choose_date_ongoing()
-            #     while True:
-            #         try:
-            #             date_ongoing = customer.convert_str_date(date_ongoing)
-            #         except ValueError:
-            #             print("The provided date is in the wrong format!")
-            #             date_ongoing = customer.choose_date_ongoing()
-            #             continue
-            #         break
-            #     print("Date ongoing: {}".format(date_ongoing))
-
-
-
-                # lst_customers = plane.create_new_customer(first_name, last_name, dob)
-                # print(lst_customers)
 
 # HOW ARE WE SAVING THE DATA? JSON, LIST?
 
@@ -100,10 +70,8 @@ def menu():
                            "d to delete a passenger,\n"
                            "l to see the list of passenger,\n"
                            "s to see the list of available seats,\n"
-                           "save to save or q to quit.\n")
-
-
-
+                           "save to save\n"
+                           "or q to quit.\n")
 
 
 menu()
