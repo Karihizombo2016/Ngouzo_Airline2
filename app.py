@@ -27,14 +27,14 @@ def menu():
                        "l to see the list of passenger,\n"
                        "s to see the list of available seats,\n"
                        "save to save\n"
-                       "or q to quit.\n")
+                       "or q to quit.\n").strip()
 
     while user_input != 'q':
         plane = Plane()
         print(plane)
         if user_input == 'a':
-            first_name = input("Enter your first name\n")
-            last_name = input("Enter your last name\n")
+            first_name = input("Enter your first name\n").strip()
+            last_name = input("Enter your last name\n").strip()
             customer = Customer(first_name, last_name)
             print(customer)
             dob = customer.get_dob()
@@ -55,6 +55,18 @@ def menu():
 
             else:
                 print("DOB: {}".format(dob))
+                age = int(customer.check_dob(dob))
+                if age < 18:
+                    import sys
+                    sys.exit("You are only {} years old.\n"
+                             "You cannot book a flight ticket without your parents".format(age))
+                else:
+                    print("You are {} years old. You can carry on".format(age))
+                # WE HAVE STOPPED HERE. WHAT DO WE DO AFTER WHEN THE PASSENGER IS > 18?
+
+
+                # print("You are {} years old".format(age))
+
 
 
 # HOW ARE WE SAVING THE DATA? JSON, LIST?
