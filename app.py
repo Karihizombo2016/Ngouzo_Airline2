@@ -59,9 +59,33 @@ def menu():
                 if age < 18:
                     import sys
                     sys.exit("You are only {} years old.\n"
-                             "You cannot book a flight ticket without your parents".format(age))
+                             "You cannot book a flight ticket without your parents!\n"
+                             "Bye.".format(age))
                 else:
-                    print("You are {} years old. You can carry on".format(age))
+                    print("You are {} years old. You can carry on.".format(age))
+                    # Decide whether one way or return
+                    num_flight = customer.choose_one_way_or_return()
+                    # WE HAVE STOPPED HERE. WE NEED TO MODIFY THE CODE TO ONLY ACCEPT 1 OR 2
+                    # One way ticket
+                    if num_flight == 1:
+                        ongoing_date = customer.choose_ongoing_date()
+                        ongoing_date = customer.convert_into_date(ongoing_date)
+                        while ongoing_date == 0:
+                            print("Your ongoing date is wrong!")
+                            ongoing_date = customer.choose_ongoing_date()
+                            ongoing_date = customer.convert_into_date(ongoing_date)
+                        else:
+                            # Get a list of seats
+                            lst_seats = plane.make_seats()
+                            # Pick a seat randomly
+                            seat_customer = customer.pick_seat(lst_seats)
+                            print("Customer {} {}, {} years old will fly on {} on seat {}"
+                                  .format(first_name, last_name, age, ongoing_date, seat_customer))
+
+
+
+                    # lst_seats = plane.make_seats()
+                    # print("Here is the list of available seats: {}".format(lst_seats))
                 # WE HAVE STOPPED HERE. WHAT DO WE DO AFTER WHEN THE PASSENGER IS > 18?
 
 
