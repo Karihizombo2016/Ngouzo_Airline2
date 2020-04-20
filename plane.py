@@ -19,9 +19,9 @@ class Plane:
         random.shuffle(seats_num)
         return seats_num
 
-    def pick_seat(self, lst_seats):
-        seat = lst_seats.pop()
-        return seat
+    # def pick_seat(self, lst_seats):
+    #     seat = lst_seats.pop()
+    #     return seat
 
 
     # def get_first_name(self):

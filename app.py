@@ -2,13 +2,6 @@ from plane import Plane
 from customer import Customer
 
 
-# miki = Customer(first_name="Miki", last_name="Madi", dob="1980-04-17")
-#
-# print(miki)
-#
-# dt_flight = miki.choose_date()
-# print(dt_flight)
-
 def menu():
     '''
     We need to modify the script so that once we have chosen a date it is automatically convert into the right format.
@@ -28,7 +21,7 @@ def menu():
                        "s to see the list of available seats,\n"
                        "save to save\n"
                        "or q to quit.\n").strip()
-
+    print()
     while user_input != 'q':
         plane = Plane()
         print(plane)
@@ -38,11 +31,6 @@ def menu():
             customer = Customer(first_name, last_name)
             print(customer)
             dob = customer.get_dob()
-
-            # dob = customer.convert_str_date(dob)
-            # first_name = plane.get_first_name()
-            # last_name = plane.get_last_name()
-            # dob = plane.get_dob()
 
             dob = customer.convert_into_date(dob)
             while dob == 0:
@@ -55,14 +43,14 @@ def menu():
 
             else:
                 print("DOB: {}".format(dob))
-                age = int(customer.check_dob(dob))
+                age = int(customer.check_age(dob))
                 if age < 18:
                     import sys
                     sys.exit("You are only {} years old.\n"
                              "You cannot book a flight ticket without your parents!\n"
                              "Bye.".format(age))
                 else:
-                    print("You are {} years old. You can carry on.".format(age))
+                    print("You are {} years old. You can carry on!".format(age))
                     # Decide whether one way or return
                     num_flight = customer.choose_one_way_or_return()
                     # WE HAVE STOPPED HERE. WE NEED TO MODIFY THE CODE TO ONLY ACCEPT 1 OR 2
@@ -77,10 +65,23 @@ def menu():
                         else:
                             # Get a list of seats
                             lst_seats = plane.make_seats()
-                            # Pick a seat randomly
-                            seat_customer = customer.pick_seat(lst_seats)
-                            print("Customer {} {}, {} years old will fly on {} on seat {}"
-                                  .format(first_name, last_name, age, ongoing_date, seat_customer))
+                            # Get a random seat or choose it manually
+                            answer = customer.choose_random_manual_seat()
+                            if answer == 0:
+                                ongoing_seat, lst_seats = customer.randomly_get_seat(lst_seats)
+                                # print("Your random seat is {}".format(ongoing_seat))
+                                customer.prt_boarding_pass(first_name, last_name, dob, ongoing_date, ongoing_seat)
+                            elif answer == 1:
+                                ongoing_seat, lst_seats = customer.choose_seat(lst_seats)
+                                # print("Your selected seat is {}".format(ongoing_seat))
+                                customer.prt_boarding_pass(first_name, last_name, dob, ongoing_date, ongoing_seat)
+                            
+
+                                # WE HAVE STOPPED HERE
+                            # # Pick a seat randomly
+                            # ongoing_seat = customer.pick_seat(lst_seats)
+                            # print("Customer {} {}, {} years old will fly on {} on seat {}"
+                            #       .format(first_name, last_name, age, ongoing_date, ongoing_seat))
 
 
 
